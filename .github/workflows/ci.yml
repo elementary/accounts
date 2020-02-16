@@ -45,6 +45,20 @@ jobs:
       - name: Lint
         run: docker-compose run flatpak_auth dializer
 
+  Doctor:
+    name: Lint (Doctor)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Compile
+        run: docker-compose build
+
+      - name: Lint
+        run: docker-compose run flatpak_auth doctor
+        continue-on-error: true
+
   Test:
     runs-on: ubuntu-latest
 

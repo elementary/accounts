@@ -1,7 +1,8 @@
 defmodule FlatpakAuth.Application do
-  # See https://hexdocs.pm/elixir/Application.html
-  # for more information on OTP Applications
-  @moduledoc false
+  @moduledoc """
+  Application for FlatpakAuth. See https://hexdocs.pm/elixir/Application.html
+  for more information on OTP Applications.
+  """
 
   use Application
 
