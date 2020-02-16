@@ -32,8 +32,8 @@ jobs:
       - name: Lint
         run: docker-compose run flatpak_auth credo
 
-  Dializer:
-    name: Lint (Dializer)
+  Dialyzer:
+    name: Lint (Dialyzer)
     runs-on: ubuntu-latest
 
     steps:
@@ -43,7 +43,7 @@ jobs:
         run: docker-compose build
 
       - name: Lint
-        run: docker-compose run flatpak_auth dializer
+        run: docker-compose run flatpak_auth dialyzer
 
   Doctor:
     name: Lint (Doctor)
