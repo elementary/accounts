@@ -1,0 +1,29 @@
+# Dockerfile
+# A dockerfile for flatpak_auth development
+
+FROM elixir:alpine
+MAINTAINER Blake Kostner
+
+RUN mkdir -p /opt/flatpak-auth
+
+COPY . /opt/flatpak-auth
+WORKDIR /opt/flatpak-auth
+
+ENV APP_NAME=flatpak-auth
+
+RUN apk --no-cache --update add \
+  bash git make g++ inotify-tools \
+  nodejs nodejs-npm && \
+  npm install npm -g --no-progress
+
+RUN cd /opt/flatpak-auth && \
+  mix local.hex --force && \
+  mix local.rebar --force && \
+  mix deps.get --all && \
+  cd /opt/flatpak-auth/assets && \
+  npm ci
+
+EXPOSE 4000
+
+ENTRYPOINT ["mix"]
+CMD ["phx.server"]

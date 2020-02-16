@@ -1,0 +1,27 @@
+---
+
+version: "3"
+
+services:
+  houston:
+    build:
+      context: .
+      dockerfile: Dockerfile-development
+    stdin_open: true
+    tty: true
+    ports:
+      - "4000:4000"
+    environment:
+      PORT: 4000
+    volumes:
+      - .:/opt/flatpak-auth
+    command: do ecto.create, phx.server
+    working_dir: /opt/flatpak-auth
+    depends_on:
+      - postgres
+
+  postgres:
+    image: timescale/timescaledb:latest-pg11
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USERNAME: postgres
