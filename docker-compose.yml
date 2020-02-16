@@ -3,7 +3,7 @@
 version: "3"
 
 services:
-  houston:
+  flatpak_auth:
     build:
       context: .
       dockerfile: Dockerfile-development
@@ -14,7 +14,11 @@ services:
     environment:
       PORT: 4000
     volumes:
-      - .:/opt/flatpak-auth
+      - ./assets:/opt/flatpak-auth/assets
+      - ./config:/opt/flatpak-auth/config
+      - ./lib:/opt/flatpak-auth/lib
+      - ./priv:/opt/flatpak-auth/priv
+      - ./test:/opt/flatpak-auth/test
     command: do ecto.create, phx.server
     working_dir: /opt/flatpak-auth
     depends_on:

@@ -11,22 +11,35 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+      - uses: actions/checkout@v1
 
-    - name: Compile
-      run: docker-compose build
+      - name: Compile
+        run: docker-compose build
 
-    - name: Format
-      run: docker-compose run houston format
+      - name: Format
+        run: docker-compose run flatpak_auth format
+
+  Credo:
+    name: Lint (Credo)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Compile
+        run: docker-compose build
+
+      - name: Format
+        run: docker-compose run flatpak_auth credo
 
   Test:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+      - uses: actions/checkout@v1
 
-    - name: Compile
-      run: docker-compose build
+      - name: Compile
+        run: docker-compose build
 
-    - name: Test
-      run: docker-compose run houston test
+      - name: Test
+        run: docker-compose run flatpak_auth test
