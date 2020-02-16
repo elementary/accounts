@@ -1,20 +1,22 @@
-# FlatpakAuth
+<div align="center">
+  <h1 align="center"><center>Flatpak Auth</center></h1>
+  <h3 align="center"><center>An API server for flatpak authentication</center></h3>
+  <br>
+  <br>
+</div>
 
-To start your Phoenix server:
+<p align="center">
+  <img src="https://github.com/elementary/flatpak-auth/workflows/CI/badge.svg" alt="CI">
+</p>
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Install Node.js dependencies with `cd assets && npm install`
-  * Start Phoenix endpoint with `mix phx.server`
+---
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+> This project is in Alpha state. It does not fully implement the authentication
+spec, does not include user account management, or Stripe payment integration
+yet.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+Flatpak Auth is an API server that implements the Flatpak authentication spec
+to achieve a pay-what-you-want model, and download count analytics.
 
-## Learn more
-
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+For development, testing, and production building instructions, please read the
+[`DEVELOPMENT.md`](DEVELOPMENT.md) file.
