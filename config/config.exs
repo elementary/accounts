@@ -16,7 +16,7 @@ config :flatpak_auth, FlatpakAuthWeb.Endpoint,
   secret_key_base: "eRkej+W6rPKRiFkXlm+1V0HTJ/AXbdHPb6JfrtZr3szhtzjQqyvvnykBfVddpBjA",
   render_errors: [view: FlatpakAuthWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: FlatpakAuth.PubSub, adapter: Phoenix.PubSub.PG2],
-  live_view: [signing_salt: "jYd5z8Br"]
+  live_view: [signing_salt: "xs973pg/6PnxIddvm638jsmJA/4vNTFO"]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -25,6 +25,10 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+
+config :flatpak_auth, FlatpakAuth.Mailer,
+  adapter: Swoosh.Adapters.Local,
+  mailbox: true
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

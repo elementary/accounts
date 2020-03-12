@@ -1,0 +1,7 @@
+<section>
+  <h1>elementary Flatpak Auth server</h1>
+  <a href="https://github.com/elementary/flatpak-auth">GitHub</a>
+
+  <a href="/login">Login</a>
+  <a href="/register">Register</a>
+</section>

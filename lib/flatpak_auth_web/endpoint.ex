@@ -10,10 +10,6 @@ defmodule FlatpakAuthWeb.Endpoint do
     signing_salt: "0Ws4aCZO"
   ]
 
-  socket "/socket", FlatpakAuthWeb.UserSocket,
-    websocket: true,
-    longpoll: false
-
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phx.digest
@@ -42,6 +38,10 @@ defmodule FlatpakAuthWeb.Endpoint do
 
   plug Plug.MethodOverride
   plug Plug.Head
+
   plug Plug.Session, @session_options
+
+  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
+
   plug FlatpakAuthWeb.Router
 end

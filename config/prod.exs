@@ -16,6 +16,8 @@ config :flatpak_auth, FlatpakAuthWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
+config :flatpak_auth, FlatpakAuth.Mailer, adapter: Swoosh.Adapters.Mandrill
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

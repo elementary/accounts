@@ -23,6 +23,7 @@ defmodule FlatpakAuthWeb do
 
       import Plug.Conn
       import FlatpakAuthWeb.Gettext
+      import Phoenix.LiveView.Controller
       alias FlatpakAuthWeb.Router.Helpers, as: Routes
     end
   end
@@ -41,6 +42,7 @@ defmodule FlatpakAuthWeb do
 
       import FlatpakAuthWeb.ErrorHelpers
       import FlatpakAuthWeb.Gettext
+      import Phoenix.LiveView.Helpers
       alias FlatpakAuthWeb.Router.Helpers, as: Routes
     end
   end
@@ -50,6 +52,7 @@ defmodule FlatpakAuthWeb do
       use Phoenix.Router
       import Plug.Conn
       import Phoenix.Controller
+      import Phoenix.LiveView.Router
     end
   end
 

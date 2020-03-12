@@ -1,0 +1,24 @@
+<section>
+  <%= if @done do %>
+    <h1>User account created!</h1>
+    <p>You can close this browser now!</p>
+  <% end %>
+
+  <%= if @waiting do %>
+    <h1>Please check email</h1>
+    <p>Please check your email for a confirmation link</p>
+  <% end %>
+
+  <%= if not @waiting and not @done do %>
+    <h1>Register</h1>
+
+    <form phx-submit="register">
+      <input name="email" type="email" />
+      <%= if @error do %>
+        <%= @error %>
+      <% end %>
+
+      <button type="submit">Register</button>
+    </form>
+  <% end %>
+</section>
