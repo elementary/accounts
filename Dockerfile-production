@@ -29,9 +29,7 @@ RUN cd /app && \
   mix phx.digest && \
   mix release
 
-RUN export RELEASE_DIR=`ls -d /app/_build/prod/rel/$APP_NAME/releases/*/` && \
-  mkdir /export && \
-  tar -xf "$RELEASE_DIR/$APP_NAME.tar.gz" -C /export
+RUN cp -R /app/_build/prod/rel/$APP_NAME /export
 
 # Dockerfile
 # An OTP docker image for running production flatpak_auth
@@ -55,4 +53,4 @@ EXPOSE 4000
 RUN apk add --no-cache bash openssl
 
 ENTRYPOINT ["/opt/flatpak-auth/bin/flatpak_auth"]
-CMD ["foreground"]
+CMD ["start"]

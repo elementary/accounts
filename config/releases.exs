@@ -1,8 +1,9 @@
 # In this file, we load production configuration and secrets
 # from environment variables. You can also hardcode secrets,
-# although such is generally not recommended and you have to
-# remember to add this file to your .gitignore.
-use Mix.Config
+# although such is generally not recommended.
+import Config
+
+config :logger, level: :info
 
 database_url =
   System.get_env("DATABASE_URL") ||
@@ -12,9 +13,19 @@ database_url =
     """
 
 config :flatpak_auth, FlatpakAuth.Repo,
-  # ssl: true,
   url: database_url,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
+
+mandrill_key =
+  System.get_env("MANDRILL_KEY") ||
+    raise """
+    environment variable MANDRILL_KEY is missing.
+    Please generate one for email sending
+    """
+
+config :flatpak_auth, FlatpakAuth.Mailer,
+  adapter: Swoosh.Adapters.Mandrill,
+  api_key: mandrill_key
 
 secret_key_base =
   System.get_env("SECRET_KEY_BASE") ||
@@ -28,14 +39,7 @@ config :flatpak_auth, FlatpakAuthWeb.Endpoint,
     port: String.to_integer(System.get_env("PORT") || "4000"),
     transport_options: [socket_opts: [:inet6]]
   ],
-  secret_key_base: secret_key_base
-
-# ## Using releases (Elixir v1.9+)
-#
-# If you are doing OTP releases, you need to instruct Phoenix
-# to start each relevant endpoint:
-#
-#     config :flatpak_auth, FlatpakAuthWeb.Endpoint, server: true
-#
-# Then you can assemble a release by calling `mix release`.
-# See `mix help release` for more information.
+  secret_key_base: secret_key_base,
+  server: true,
+  url: [host: "example.com", port: 80],
+  cache_static_manifest: "priv/static/cache_manifest.json"
