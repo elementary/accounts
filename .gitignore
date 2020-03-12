@@ -18,3 +18,9 @@ erl_crash.dump
 
 # Also ignore archive artifacts (built via "mix archive.build").
 *.ez
+
+# Node JS 3rd-party dependencies
+/assets/node_modules/
+
+# Static generated files
+/priv/static/
