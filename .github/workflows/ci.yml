@@ -3,8 +3,10 @@
 name: CI
 
 on:
-  - pull_request
-  - push
+  pull_request:
+  push:
+    branches-ignore:
+      - master
 
 jobs:
   Format:
@@ -47,6 +49,7 @@ jobs:
 
       - name: Lint
         run: docker-compose run flatpak_auth dialyzer
+        continue-on-error: true
 
   Doctor:
     name: Lint (Doctor)

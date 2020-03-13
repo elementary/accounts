@@ -43,10 +43,11 @@ defmodule FlatpakAuth.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:credo, "~> 1.2", only: [:dev], runtime: false},
-      {:dialyxir, "~> 1.0.0-rc.7", only: [:dev], runtime: false},
-      {:doctor, "~> 0.11.0", only: [:dev], runtime: false},
+      {:credo, "~> 1.2", only: :dev, runtime: false},
+      {:dialyxir, "~> 1.0.0-rc.7", only: :dev, runtime: false},
+      {:doctor, "~> 0.11.0", only: :dev, runtime: false},
       {:ecto_sql, "~> 3.1"},
+      {:erlex, "~> 0.2.6", only: :dev},
       {:floki, ">= 0.0.0", only: :test},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
