@@ -16,7 +16,7 @@ config :flatpak_auth, FlatpakAuth.Repo,
   url: database_url,
   ssl: true,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
-  ssl_opts: [cacertfile: "/tmp/server-ca.pem"]
+  ssl_opts: [cacertfile: "/tmp/flatpak-auth/server-ca.pem"]
 
 mandrill_key =
   System.get_env("MANDRILL_KEY") ||
@@ -36,12 +36,22 @@ secret_key_base =
     You can generate one by calling: mix phx.gen.secret
     """
 
+domain =
+  System.get_env("DOMAIN") ||
+    raise """
+    environment variable DOMAIN is missing.
+    Please set it so email links work correctly
+    """
+
 config :flatpak_auth, FlatpakAuthWeb.Endpoint,
   http: [
-    port: String.to_integer(System.get_env("PORT") || "4000"),
+    port: String.to_integer(System.get_env("PORT") || "80"),
     transport_options: [socket_opts: [:inet6]]
   ],
   secret_key_base: secret_key_base,
   server: true,
-  url: [host: "example.com", port: 80],
+  url: [
+    host: domain,
+    port: String.to_integer(System.get_env("PUBLIC_PORT") || "80")
+  ],
   cache_static_manifest: "priv/static/cache_manifest.json"
