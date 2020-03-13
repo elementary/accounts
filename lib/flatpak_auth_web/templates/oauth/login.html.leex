@@ -1,0 +1,12 @@
+<section>
+  <h1>Login</h1>
+
+  <form phx-submit="login">
+    <input name="email" type="email" />
+    <%= if @error do %>
+      <%= error_message(@error) %>
+    <% end %>
+
+    <button type="submit">Login</button>
+  </form>
+</section>

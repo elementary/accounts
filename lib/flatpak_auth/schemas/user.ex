@@ -7,44 +7,53 @@ defmodule FlatpakAuth.Schema.User do
 
   import Ecto.Changeset
 
+  alias FlatpakAuth.Repo
+  alias FlatpakAuth.Schema.{User, UserToken}
+
   schema "users" do
     field :email
 
-    field :validation_code
-    field :validation_complete, :boolean, default: false
+    field :validated, :boolean, default: false
+
+    has_many :tokens, UserToken
 
     timestamps()
   end
 
+  @type t :: %User{}
+
   @fields ~w(
     email
-    validation_code
-    validation_complete
+    validated
   )a
 
   @doc false
-  def changeset(user, params \\ %{}) do
+  def changeset(%User{} = user, params \\ %{}) do
     user
     |> cast(params, @fields)
     |> validate_required([:email])
     |> validate_format(:email, ~r/@/)
     |> unique_constraint(:email)
-    |> unique_constraint(:validation_code)
   end
 
   @doc """
-  Generates a new validation code and sets it in the changeset.
+  Gets a user by the email address.
   """
-  def set_validation_code(changeset) do
-    code =
-      :sha256
-      |> :crypto.hash(:crypto.strong_rand_bytes(64))
-      |> Base.encode16()
-
-    put_change(changeset, :validation_code, code)
+  @spec get(String.t) :: User.t | nil
+  def get(email) do
+    Repo.get_by(User, email: email)
   end
 
-  def validate_changeset(user) do
-    changeset(user, %{validation_code: nil, validation_complete: true})
+  @doc """
+  Creates a new user with the given email address. This will also return a
+  non validated user if they already have an email entered.
+  """
+  @spec create(String.t) :: User.t | {:error, Changeset.t}
+  def create(email) do
+    case get(email) do
+      %{validated: false} = user -> {:ok, user}
+      %{validated: true} -> {:error, :conflict}
+      nil -> Repo.insert(changeset(%User{}, %{email: email}))
+    end
   end
 end

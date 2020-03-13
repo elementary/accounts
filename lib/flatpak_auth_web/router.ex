@@ -25,17 +25,20 @@ defmodule FlatpakAuthWeb.Router do
     pipe_through :browser
 
     get "/", HomepageController, :index
-
-    get "/register", UserController, :register
-    get "/register/:key", UserController, :validate
-    get "/login", UserController, :login
   end
 
-  scope "/", FlatpakAuthWeb do
+  scope "/auth/v1", FlatpakAuthWeb do
+    pipe_through :browser
+
+    get "/", OauthController, :index
+    get "/:token", OauthController, :continue
+  end
+
+  scope "/api/v1", FlatpakAuthWeb do
     pipe_through :api
 
-    get "/api/v1/get_tokens", PurchaseController, :index
-    get "/api/v1/get_application", PurchaseController, :view
-    get "/api/v1/begin_purchase", PurchaseController, :create
+    get "/history", PurchaseController, :index
+    get "/view", PurchaseController, :view
+    get "/purchase", PurchaseController, :create
   end
 end

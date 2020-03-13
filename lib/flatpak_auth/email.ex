@@ -5,7 +5,49 @@ defmodule FlatpakAuth.Email do
 
   import Swoosh.Email
 
+  alias FlatpakAuth.Repo
+  alias FlatpakAuth.Schema.{User, UserToken}
   alias FlatpakAuthWeb.{Endpoint, Router}
+
+  def send(%UserToken{} = token) do
+    user =
+      token
+      |> Repo.preload([:user])
+      |> Map.get(:user)
+
+    case token.type do
+      "login" -> login(user, token)
+      "validate" -> verify(user, token)
+    end
+  end
+
+  def login(user, token) do
+    url = Router.Helpers.oauth_url(Endpoint, :continue, token.id)
+    options = %{url: url}
+
+    new()
+    |> to({user.email, user.email})
+    |> from({"elementary AppCenter", "appcenter@elementary.io"})
+    |> put_provider_option(:global_merge_vars, map_options(options))
+    |> put_provider_option(:merge_language, "handlebars")
+    |> put_provider_option(:merge, true)
+    |> put_provider_option(:template_content, map_options(options))
+    |> put_provider_option(:template_name, "flatpak-login")
+  end
+
+  def verify(user, token) do
+    url = Router.Helpers.oauth_url(Endpoint, :continue, token.id)
+    options = %{url: url}
+
+    new()
+    |> to({user.email, user.email})
+    |> from({"elementary AppCenter", "appcenter@elementary.io"})
+    |> put_provider_option(:global_merge_vars, map_options(options))
+    |> put_provider_option(:merge_language, "handlebars")
+    |> put_provider_option(:merge, true)
+    |> put_provider_option(:template_content, map_options(options))
+    |> put_provider_option(:template_name, "flatpak-register")
+  end
 
   defp map_options(options) do
     options
@@ -16,19 +58,5 @@ defmodule FlatpakAuth.Email do
         "content" => value
       }
     end)
-  end
-
-  def registration(user) do
-    registration_link = Router.Helpers.user_url(Endpoint, :validate, user.validation_code)
-    options = %{url: registration_link}
-
-    new()
-    |> to({user.email, user.email})
-    |> from({"elementary AppCenter", "appcenter@elementary.io"})
-    |> put_provider_option(:global_merge_vars, map_options(options))
-    |> put_provider_option(:merge_language, "handlebars")
-    |> put_provider_option(:merge, true)
-    |> put_provider_option(:template_content, map_options(options))
-    |> put_provider_option(:template_name, "flatpak-register")
   end
 end

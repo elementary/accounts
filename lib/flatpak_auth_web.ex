@@ -25,6 +25,8 @@ defmodule FlatpakAuthWeb do
       import FlatpakAuthWeb.Gettext
       import Phoenix.LiveView.Controller
       alias FlatpakAuthWeb.Router.Helpers, as: Routes
+
+      action_fallback FlatpakAuthWeb.FallbackController
     end
   end
 
