@@ -93,7 +93,7 @@ jobs:
 
       - name: Build
         run: >
-        	docker build
+          docker build
             --tag elementary/flatpak-auth:latest
             --tag elementary/flatpak-auth:${{ github.sha }}
             --file Dockerfile-production .
