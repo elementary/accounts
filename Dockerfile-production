@@ -48,7 +48,7 @@ ENV PORT=4000
 ENV REPLACE_OS_VARS=true
 ENV SHELL=/bin/bash
 
-EXPOSE 4000
+EXPOSE 80
 
 RUN apk add --no-cache bash openssl
 
