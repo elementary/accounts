@@ -14,7 +14,9 @@ database_url =
 
 config :flatpak_auth, FlatpakAuth.Repo,
   url: database_url,
-  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
+  ssl: true,
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+  ssl_opts: [cacertfile: "/tmp/server-ca.pem"]
 
 mandrill_key =
   System.get_env("MANDRILL_KEY") ||
