@@ -1,4 +1,8 @@
 defmodule FlatpakAuthWeb.LoginLive do
+  @moduledoc """
+  Socket handling for browser updating on the login page.
+  """
+
   use Phoenix.LiveView
 
   def render(assigns) do
@@ -30,7 +34,6 @@ defmodule FlatpakAuthWeb.LoginLive do
   end
 
   def handle_info(:login, socket) do
-    # TODO: Redirect with header info
     {:noreply,
      assign(socket, %{
        error: "User not found",

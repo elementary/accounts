@@ -8,9 +8,10 @@ defmodule FlatpakAuthWeb.UserController do
   end
 
   def validate(conn, %{"key" => key}) do
-    with {:ok, _user} <- User.validate(key) do
-      render(conn, "validated.html")
-    else
+    case User.validate(key) do
+      {:ok, _user} ->
+        render(conn, "validated.html")
+
       {:error, "user not found"} ->
         put_status(conn, :not_found)
 

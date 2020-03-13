@@ -10,9 +10,8 @@ defmodule FlatpakAuth.User do
   Creates a new user and sends a validation email.
   """
   def create(email) do
-    with {:ok, user} <- get_unvalidated_user(email) do
-      send_validation_email(user)
-    else
+    case get_unvalidated_user(email) do
+      {:ok, user} -> send_validation_email(user)
       res -> res
     end
   end
@@ -39,10 +38,12 @@ defmodule FlatpakAuth.User do
   Sends the user a validation email.
   """
   def send_validation_email(user) do
-    with {:ok, _} <- Mailer.deliver(Email.registration(user)) do
-      {:ok, user}
-    else
-      _ -> {:error, "error sending email"}
+    case Mailer.deliver(Email.registration(user)) do
+      {:ok, _} ->
+        {:ok, user}
+
+      _ ->
+        {:error, "error sending email"}
     end
   end
 

@@ -1,4 +1,8 @@
 defmodule FlatpakAuthWeb.RegisterLive do
+  @moduledoc """
+  Socket handling for browser updating on the register page.
+  """
+
   use Phoenix.LiveView
 
   alias Ecto.Changeset
@@ -23,9 +27,10 @@ defmodule FlatpakAuthWeb.RegisterLive do
   end
 
   def handle_event("register", %{"email" => email}, socket) do
-    with {:ok, user} <- User.create(email) do
-      wait_for_validation(socket, user.id)
-    else
+    case User.create(email) do
+      {:ok, user} ->
+        wait_for_validation(socket, user.id)
+
       {:error, %Changeset{} = changeset} ->
         error =
           changeset.errors
@@ -44,7 +49,5 @@ defmodule FlatpakAuthWeb.RegisterLive do
 
   def handle_info(%{event: "validated"}, socket) do
     {:noreply, set(socket, done: true)}
-
-    # TODO: Redirect with registered headers here!
   end
 end

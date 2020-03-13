@@ -1,4 +1,8 @@
 defmodule FlatpakAuth.Email do
+  @moduledoc """
+  Handles templating and setup work for emails.
+  """
+
   import Swoosh.Email
 
   alias FlatpakAuthWeb.{Endpoint, Router}
