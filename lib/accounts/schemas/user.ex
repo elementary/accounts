@@ -39,7 +39,7 @@ defmodule Accounts.Schema.User do
   @doc """
   Gets a user by the email address.
   """
-  @spec get(String.t) :: User.t | nil
+  @spec get(String.t()) :: User.t() | nil
   def get(email) do
     Repo.get_by(User, email: email)
   end
@@ -48,7 +48,7 @@ defmodule Accounts.Schema.User do
   Creates a new user with the given email address. This will also return a
   non validated user if they already have an email entered.
   """
-  @spec create(String.t) :: User.t | {:error, Changeset.t}
+  @spec create(String.t()) :: User.t() | {:error, Changeset.t()}
   def create(email) do
     case get(email) do
       %{validated: false} = user -> {:ok, user}

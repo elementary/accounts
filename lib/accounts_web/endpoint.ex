@@ -41,8 +41,7 @@ defmodule AccountsWeb.Endpoint do
 
   plug Plug.Session, @session_options
 
-  socket "/live", Phoenix.LiveView.Socket,
-    websocket: [connect_info: [session: @session_options]]
+  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
 
   plug AccountsWeb.Router
 end

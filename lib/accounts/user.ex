@@ -13,7 +13,7 @@ defmodule Accounts.User do
   email and once the link in the email is clicked, we dispatch an event that
   causes the user to complete login.
   """
-  @spec login(User.t) :: {:ok, User.t} | {:error, :failed_dependency} | {:error, :not_found}
+  @spec login(User.t()) :: {:ok, User.t()} | {:error, :failed_dependency} | {:error, :not_found}
   def login(%User{} = user) do
     with {:ok, token} <- UserToken.create(user, "login"),
          :ok <- send_email(token) do
@@ -29,7 +29,8 @@ defmodule Accounts.User do
   send them an email with a link. When they click that link, we complete the
   registration process.
   """
-  @spec create(String.t) :: {:ok, User.t} | {:error, :failed_dependency} | {:error, :not_found}
+  @spec create(String.t()) ::
+          {:ok, User.t()} | {:error, :failed_dependency} | {:error, :not_found}
   def create(email) do
     with {:ok, user} <- User.create(email),
          {:ok, token} <- UserToken.create(user, "validate"),
@@ -44,7 +45,7 @@ defmodule Accounts.User do
   @doc """
   Sends an email to a user for login or verify steps.
   """
-  @spec send_email(UserToken.t) :: :ok | {:error, :failed_dependency}
+  @spec send_email(UserToken.t()) :: :ok | {:error, :failed_dependency}
   def send_email(token) do
     case Mailer.deliver(Email.send(token)) do
       {:ok, _} -> :ok
@@ -55,7 +56,7 @@ defmodule Accounts.User do
   @doc """
   Finishes the login or verify process with the given token or user record.
   """
-  @spec complete(UserToken.t) :: {:ok, UserToken.t} | {:error, :not_found}
+  @spec complete(UserToken.t()) :: {:ok, UserToken.t()} | {:error, :not_found}
   def complete(%UserToken{} = token) do
     token
     |> Repo.preload([:user])
@@ -63,6 +64,7 @@ defmodule Accounts.User do
     |> UserToken.remove()
 
     topic = "user:" <> to_string(token.user_id)
+
     AccountsWeb.Endpoint.broadcast(topic, token.type, %{
       token: token,
       user: token.user
@@ -71,7 +73,7 @@ defmodule Accounts.User do
     {:ok, token}
   end
 
-  @spec complete(String.t) :: {:ok, UserToken.t} | {:error, :not_found}
+  @spec complete(String.t()) :: {:ok, UserToken.t()} | {:error, :not_found}
   def complete(token) do
     case UserToken.get(token) do
       nil -> {:error, :not_found}

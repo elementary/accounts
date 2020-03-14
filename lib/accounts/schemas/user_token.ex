@@ -50,7 +50,7 @@ defmodule Accounts.Schema.UserToken do
   @doc """
   Creates a new token for the user with the given type.
   """
-  @spec create(User.t, String.t) :: {:ok, UserToken.t} | {:error, Changeset.t}
+  @spec create(User.t(), String.t()) :: {:ok, UserToken.t()} | {:error, Changeset.t()}
   def create(%User{} = user, type) do
     %UserToken{}
     |> changeset(%{type: type, user_id: user.id})
@@ -60,12 +60,12 @@ defmodule Accounts.Schema.UserToken do
   @doc """
   Fetches a token for a user with the string and type.
   """
-  @spec get(String.t) :: UserToken.t | nil
+  @spec get(String.t()) :: UserToken.t() | nil
   def get(token) do
     get(token, DateTime.utc_now())
   end
 
-  @spec get(String.t, DateTime.t) :: UserToken.t | nil
+  @spec get(String.t(), DateTime.t()) :: UserToken.t() | nil
   def get(token, datetime) do
     UserToken
     |> where([t], t.id == ^token)
@@ -80,7 +80,7 @@ defmodule Accounts.Schema.UserToken do
   Removes all the tokens for a user. We use this to clear everything after a
   user successfully validates or logs in.
   """
-  @spec remove(User.t) :: :ok
+  @spec remove(User.t()) :: :ok
   def remove(%User{} = user) do
     remove(user, DateTime.utc_now())
   end
@@ -88,7 +88,7 @@ defmodule Accounts.Schema.UserToken do
   @doc """
   Removes all tokens from a user that expired before the given DateTime.
   """
-  @spec remove(User.t, DateTime.t) :: :ok
+  @spec remove(User.t(), DateTime.t()) :: :ok
   def remove(%User{} = user, datetime) do
     UserToken
     |> where([t], t.user_id == ^user.id)
