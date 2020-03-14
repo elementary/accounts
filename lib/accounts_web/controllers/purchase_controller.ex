@@ -1,5 +1,5 @@
-defmodule FlatpakAuthWeb.PurchaseController do
-  use FlatpakAuthWeb, :controller
+defmodule AccountsWeb.PurchaseController do
+  use AccountsWeb, :controller
 
   def index(conn, _params) do
   end

@@ -1,12 +1,12 @@
-defmodule FlatpakAuthWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :flatpak_auth
+defmodule AccountsWeb.Endpoint do
+  use Phoenix.Endpoint, otp_app: :accounts
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
   @session_options [
     store: :cookie,
-    key: "_flatpak_auth_key",
+    key: "_accounts_key",
     signing_salt: "0Ws4aCZO"
   ]
 
@@ -16,7 +16,7 @@ defmodule FlatpakAuthWeb.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/",
-    from: :flatpak_auth,
+    from: :accounts,
     gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
@@ -41,7 +41,8 @@ defmodule FlatpakAuthWeb.Endpoint do
 
   plug Plug.Session, @session_options
 
-  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
+  socket "/live", Phoenix.LiveView.Socket,
+    websocket: [connect_info: [session: @session_options]]
 
-  plug FlatpakAuthWeb.Router
+  plug AccountsWeb.Router
 end

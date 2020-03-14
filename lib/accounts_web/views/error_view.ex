@@ -1,5 +1,5 @@
-defmodule FlatpakAuthWeb.ErrorView do
-  use FlatpakAuthWeb, :view
+defmodule AccountsWeb.ErrorView do
+  use AccountsWeb, :view
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.

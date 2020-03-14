@@ -1,5 +1,5 @@
-defmodule FlatpakAuthWeb.FallbackController do
-  use FlatpakAuthWeb, :controller
+defmodule AccountsWeb.FallbackController do
+  use AccountsWeb, :controller
 
   def call(conn, {:error, :not_found}) do
     put_status(conn, :not_found)

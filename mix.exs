@@ -1,9 +1,9 @@
-defmodule FlatpakAuth.MixProject do
+defmodule Accounts.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :flatpak_auth,
+      app: :accounts,
       version: "0.1.0",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -20,14 +20,14 @@ defmodule FlatpakAuth.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {FlatpakAuth.Application, []},
+      mod: {Accounts.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
 
   def releases do
     [
-      flatpak_auth: [
+      accounts: [
         include_executables_for: [:unix],
         applications: [runtime_tools: :permanent]
       ]

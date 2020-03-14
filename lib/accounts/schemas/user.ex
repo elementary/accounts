@@ -1,4 +1,4 @@
-defmodule FlatpakAuth.Schema.User do
+defmodule Accounts.Schema.User do
   @moduledoc """
   Handles user registration and login information.
   """
@@ -7,8 +7,8 @@ defmodule FlatpakAuth.Schema.User do
 
   import Ecto.Changeset
 
-  alias FlatpakAuth.Repo
-  alias FlatpakAuth.Schema.{User, UserToken}
+  alias Accounts.Repo
+  alias Accounts.Schema.{User, UserToken}
 
   schema "users" do
     field :email

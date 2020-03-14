@@ -12,11 +12,11 @@ database_url =
     For example: ecto://USER:PASS@HOST/DATABASE
     """
 
-config :flatpak_auth, FlatpakAuth.Repo,
+config :accounts, Accounts.Repo,
   url: database_url,
   ssl: true,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
-  ssl_opts: [cacertfile: "/tmp/flatpak-auth/server-ca.pem"]
+  ssl_opts: [cacertfile: "/tmp/accounts/server-ca.pem"]
 
 mandrill_key =
   System.get_env("MANDRILL_KEY") ||
@@ -25,7 +25,7 @@ mandrill_key =
     Please generate one for email sending
     """
 
-config :flatpak_auth, FlatpakAuth.Mailer,
+config :accounts, Accounts.Mailer,
   adapter: Swoosh.Adapters.Mandrill,
   api_key: mandrill_key
 
@@ -43,7 +43,7 @@ domain =
     Please set it so email links work correctly
     """
 
-config :flatpak_auth, FlatpakAuthWeb.Endpoint,
+config :accounts, AccountsWeb.Endpoint,
   http: [
     port: String.to_integer(System.get_env("PORT") || "80"),
     transport_options: [socket_opts: [:inet6]]

@@ -3,7 +3,7 @@
 version: "3"
 
 services:
-  flatpak_auth:
+  accounts:
     build:
       context: .
       dockerfile: Dockerfile-development
@@ -14,13 +14,13 @@ services:
     environment:
       PORT: 4000
     volumes:
-      - ./assets:/opt/flatpak-auth/assets
-      - ./config:/opt/flatpak-auth/config
-      - ./lib:/opt/flatpak-auth/lib
-      - ./priv:/opt/flatpak-auth/priv
-      - ./test:/opt/flatpak-auth/test
+      - ./assets:/opt/accounts/assets
+      - ./config:/opt/accounts/config
+      - ./lib:/opt/accounts/lib
+      - ./priv:/opt/accounts/priv
+      - ./test:/opt/accounts/test
     command: do ecto.create, phx.server
-    working_dir: /opt/flatpak-auth
+    working_dir: /opt/accounts
     depends_on:
       - postgres
 

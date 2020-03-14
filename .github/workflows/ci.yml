@@ -20,7 +20,7 @@ jobs:
         run: docker-compose build
 
       - name: Format
-        run: docker-compose run flatpak_auth format
+        run: docker-compose run accounts format
 
   Credo:
     name: Lint (Credo)
@@ -34,7 +34,7 @@ jobs:
         run: docker-compose build
 
       - name: Lint
-        run: docker-compose run flatpak_auth credo
+        run: docker-compose run accounts credo
 
   Dialyzer:
     name: Lint (Dialyzer)
@@ -48,7 +48,7 @@ jobs:
         run: docker-compose build
 
       - name: Lint
-        run: docker-compose run flatpak_auth dialyzer
+        run: docker-compose run accounts dialyzer
         continue-on-error: true
 
   Doctor:
@@ -63,7 +63,7 @@ jobs:
         run: docker-compose build
 
       - name: Lint
-        run: docker-compose run flatpak_auth doctor
+        run: docker-compose run accounts doctor
         continue-on-error: true
 
   Test:
@@ -77,4 +77,4 @@ jobs:
         run: docker-compose build
 
       - name: Test
-        run: docker-compose run flatpak_auth test
+        run: docker-compose run accounts test

@@ -19,7 +19,7 @@ jobs:
         run: docker-compose build
 
       - name: Format
-        run: docker-compose run flatpak_auth format
+        run: docker-compose run accounts format
 
   Credo:
     name: Lint (Credo)
@@ -33,7 +33,7 @@ jobs:
         run: docker-compose build
 
       - name: Lint
-        run: docker-compose run flatpak_auth credo
+        run: docker-compose run accounts credo
 
   Dialyzer:
     name: Lint (Dialyzer)
@@ -47,7 +47,7 @@ jobs:
         run: docker-compose build
 
       - name: Lint
-        run: docker-compose run flatpak_auth dialyzer
+        run: docker-compose run accounts dialyzer
         continue-on-error: true
 
   Doctor:
@@ -62,7 +62,7 @@ jobs:
         run: docker-compose build
 
       - name: Lint
-        run: docker-compose run flatpak_auth doctor
+        run: docker-compose run accounts doctor
         continue-on-error: true
 
   Test:
@@ -76,7 +76,7 @@ jobs:
         run: docker-compose build
 
       - name: Test
-        run: docker-compose run flatpak_auth test
+        run: docker-compose run accounts test
 
   Publish:
     runs-on: ubuntu-latest
@@ -94,8 +94,8 @@ jobs:
       - name: Build
         run: >
           docker build \
-            --tag elementary/flatpak-auth:latest \
-            --tag elementary/flatpak-auth:${{ github.sha }} \
+            --tag elementary/accounts:latest \
+            --tag elementary/accounts:${{ github.sha }} \
             --file Dockerfile-production .
 
       - name: Login
@@ -105,4 +105,4 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Publish
-        run: docker push elementary/flatpak-auth:latest
+        run: docker push elementary/accounts:latest

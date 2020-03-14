@@ -1,13 +1,13 @@
 import Config
 
-config :flatpak_auth,
-  ecto_repos: [FlatpakAuth.Repo]
+config :accounts,
+  ecto_repos: [Accounts.Repo]
 
-config :flatpak_auth, FlatpakAuthWeb.Endpoint,
+config :accounts, AccountsWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "eRkej+W6rPKRiFkXlm+1V0HTJ/AXbdHPb6JfrtZr3szhtzjQqyvvnykBfVddpBjA",
-  render_errors: [view: FlatpakAuthWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: FlatpakAuth.PubSub, adapter: Phoenix.PubSub.PG2],
+  render_errors: [view: AccountsWeb.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: Accounts.PubSub, adapter: Phoenix.PubSub.PG2],
   live_view: [signing_salt: "xs973pg/6PnxIddvm638jsmJA/4vNTFO"]
 
 config :logger, :console,
@@ -16,7 +16,7 @@ config :logger, :console,
 
 config :phoenix, :json_library, Jason
 
-config :flatpak_auth, FlatpakAuth.Mailer,
+config :accounts, Accounts.Mailer,
   adapter: Swoosh.Adapters.Local,
   mailbox: true
 

@@ -1,14 +1,14 @@
 import Config
 
-config :flatpak_auth, FlatpakAuth.Repo,
+config :accounts, Accounts.Repo,
   username: "postgres",
   password: "postgres",
-  database: "flatpak_auth_dev",
+  database: "accounts_dev",
   hostname: "postgres",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
-config :flatpak_auth, FlatpakAuthWeb.Endpoint,
+config :accounts, AccountsWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -23,13 +23,13 @@ config :flatpak_auth, FlatpakAuthWeb.Endpoint,
     ]
   ]
 
-config :flatpak_auth, FlatpakAuthWeb.Endpoint,
+config :accounts, AccountsWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/flatpak_auth_web/(live|views)/.*(ex)$",
-      ~r"lib/flatpak_auth_web/templates/.*(eex)$"
+      ~r"lib/accounts_web/(live|views)/.*(ex)$",
+      ~r"lib/accounts_web/templates/.*(eex)$"
     ]
   ]
 

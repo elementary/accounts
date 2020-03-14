@@ -1,15 +1,14 @@
 # Dockerfile
-# Building flatpak_auth in production environment
+# Building accounts in production environment
 
 FROM elixir:alpine as build
-MAINTAINER Blake Kostner
 
 RUN mkdir -p /app
 
 COPY . /app
 WORKDIR /app
 
-ENV APP_NAME=flatpak_auth
+ENV APP_NAME=accounts
 ENV MIX_ENV=prod
 
 RUN apk --no-cache --update add \
@@ -32,17 +31,16 @@ RUN cd /app && \
 RUN cp -R /app/_build/prod/rel/$APP_NAME /export
 
 # Dockerfile
-# An OTP docker image for running production flatpak_auth
+# An OTP docker image for running production accounts
 
 FROM elixir:alpine as release
-MAINTAINER Blake Kostner
 
-RUN mkdir -p /opt/flatpak-auth
+RUN mkdir -p /opt/accounts
 
-COPY --from=build /export/ /opt/flatpak-auth
-WORKDIR /opt/flatpak-auth
+COPY --from=build /export/ /opt/accounts
+WORKDIR /opt/accounts
 
-ENV MIX_APP=flatpak_auth
+ENV MIX_APP=accounts
 ENV MIX_ENV=prod
 ENV PORT=4000
 ENV REPLACE_OS_VARS=true
@@ -52,5 +50,5 @@ EXPOSE 80
 
 RUN apk add --no-cache bash openssl
 
-ENTRYPOINT ["/opt/flatpak-auth/bin/flatpak_auth"]
+ENTRYPOINT ["/opt/accounts/bin/accounts"]
 CMD ["start"]

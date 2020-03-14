@@ -1,12 +1,12 @@
-defmodule FlatpakAuthWeb do
+defmodule AccountsWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, views, channels and so on.
 
   This can be used in your application as:
 
-      use FlatpakAuthWeb, :controller
-      use FlatpakAuthWeb, :view
+      use AccountsWeb, :controller
+      use AccountsWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -19,22 +19,22 @@ defmodule FlatpakAuthWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: FlatpakAuthWeb
+      use Phoenix.Controller, namespace: AccountsWeb
 
       import Plug.Conn
-      import FlatpakAuthWeb.Gettext
+      import AccountsWeb.Gettext
       import Phoenix.LiveView.Controller
-      alias FlatpakAuthWeb.Router.Helpers, as: Routes
+      alias AccountsWeb.Router.Helpers, as: Routes
 
-      action_fallback FlatpakAuthWeb.FallbackController
+      action_fallback AccountsWeb.FallbackController
     end
   end
 
   def view do
     quote do
       use Phoenix.View,
-        root: "lib/flatpak_auth_web/templates",
-        namespace: FlatpakAuthWeb
+        root: "lib/accounts_web/templates",
+        namespace: AccountsWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 1, get_flash: 2, view_module: 1]
@@ -42,10 +42,10 @@ defmodule FlatpakAuthWeb do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import FlatpakAuthWeb.ErrorHelpers
-      import FlatpakAuthWeb.Gettext
+      import AccountsWeb.ErrorHelpers
+      import AccountsWeb.Gettext
       import Phoenix.LiveView.Helpers
-      alias FlatpakAuthWeb.Router.Helpers, as: Routes
+      alias AccountsWeb.Router.Helpers, as: Routes
     end
   end
 
@@ -61,7 +61,7 @@ defmodule FlatpakAuthWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import FlatpakAuthWeb.Gettext
+      import AccountsWeb.Gettext
     end
   end
 

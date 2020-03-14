@@ -1,4 +1,4 @@
-defmodule FlatpakAuth.Schema.UserToken do
+defmodule Accounts.Schema.UserToken do
   @moduledoc """
   Handles storing user login and verification tokens.
   """
@@ -7,8 +7,8 @@ defmodule FlatpakAuth.Schema.UserToken do
 
   import Ecto.{Changeset, Query}
 
-  alias FlatpakAuth.Repo
-  alias FlatpakAuth.Schema.{User, UserToken}
+  alias Accounts.Repo
+  alias Accounts.Schema.{User, UserToken}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id

@@ -1,12 +1,12 @@
-defmodule FlatpakAuthWeb.OauthController do
-  use FlatpakAuthWeb, :controller
+defmodule AccountsWeb.OauthController do
+  use AccountsWeb, :controller
 
-  alias FlatpakAuth.User
+  alias Accounts.User
 
   plug :put_layout, "oauth.html"
 
   def index(conn, _params) do
-    live_render(conn, FlatpakAuthWeb.OauthLive)
+    live_render(conn, AccountsWeb.OauthLive)
   end
 
   def continue(conn, %{"token" => uuid}) do

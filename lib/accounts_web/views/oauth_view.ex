@@ -1,5 +1,5 @@
-defmodule FlatpakAuthWeb.OauthView do
-  use FlatpakAuthWeb, :view
+defmodule AccountsWeb.OauthView do
+  use AccountsWeb, :view
 
   @doc """
   Takes some sort of error and returns a string

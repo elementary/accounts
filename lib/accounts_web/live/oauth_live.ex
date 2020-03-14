@@ -1,4 +1,4 @@
-defmodule FlatpakAuthWeb.OauthLive do
+defmodule AccountsWeb.OauthLive do
   @moduledoc """
   Socket handling for browser updating on the login page.
   """
@@ -6,7 +6,7 @@ defmodule FlatpakAuthWeb.OauthLive do
   use Phoenix.LiveView
 
   alias Ecto.Changeset
-  alias FlatpakAuth.User
+  alias Accounts.User
 
   @default_state [
     template: "login.html",
@@ -16,7 +16,7 @@ defmodule FlatpakAuthWeb.OauthLive do
   ]
 
   def render(assigns) do
-    Phoenix.View.render(FlatpakAuthWeb.OauthView, assigns.template, assigns)
+    Phoenix.View.render(AccountsWeb.OauthView, assigns.template, assigns)
   end
 
   defp set(socket, params \\ []) do
@@ -26,14 +26,14 @@ defmodule FlatpakAuthWeb.OauthLive do
 
   defp wait(socket, user) do
     with {:ok, user} <- User.login(user.email) do
-      FlatpakAuthWeb.Endpoint.subscribe("user:" <> to_string(user.id))
+      AccountsWeb.Endpoint.subscribe("user:" <> to_string(user.id))
       {:noreply, set(socket, template: "logging_in.html", user: user)}
     end
   end
 
   defp register(socket, email) do
     with {:ok, user} <- User.create(email) do
-      FlatpakAuthWeb.Endpoint.subscribe("user:" <> to_string(user.id))
+      AccountsWeb.Endpoint.subscribe("user:" <> to_string(user.id))
       {:noreply, set(socket, template: "registering.html", user: user)}
     end
   end

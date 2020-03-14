@@ -1,0 +1,7 @@
+<section>
+  <h1>elementary Accounts</h1>
+  <a href="https://github.com/elementary/accounts">GitHub</a>
+
+  <a href="/auth/v1/login">Login</a>
+  <a href="/auth/v1/register">Register</a>
+</section>

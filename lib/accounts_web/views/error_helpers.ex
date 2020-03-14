@@ -1,4 +1,4 @@
-defmodule FlatpakAuthWeb.ErrorHelpers do
+defmodule AccountsWeb.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
@@ -36,9 +36,9 @@ defmodule FlatpakAuthWeb.ErrorHelpers do
     # should be written to the errors.po file. The :count option is
     # set by Ecto and indicates we should also apply plural rules.
     if count = opts[:count] do
-      Gettext.dngettext(FlatpakAuthWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(AccountsWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(FlatpakAuthWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(AccountsWeb.Gettext, "errors", msg, opts)
     end
   end
 end

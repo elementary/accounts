@@ -1,10 +1,10 @@
-defmodule FlatpakAuth.User do
+defmodule Accounts.User do
   @moduledoc """
   Handles user registration and login information.
   """
 
-  alias FlatpakAuth.{Email, Mailer, Repo}
-  alias FlatpakAuth.Schema.{User, UserToken}
+  alias Accounts.{Email, Mailer, Repo}
+  alias Accounts.Schema.{User, UserToken}
 
   defdelegate get(email), to: User
 
@@ -63,7 +63,7 @@ defmodule FlatpakAuth.User do
     |> UserToken.remove()
 
     topic = "user:" <> to_string(token.user_id)
-    FlatpakAuthWeb.Endpoint.broadcast(topic, token.type, %{
+    AccountsWeb.Endpoint.broadcast(topic, token.type, %{
       token: token,
       user: token.user
     })

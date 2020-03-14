@@ -1,13 +1,13 @@
-defmodule FlatpakAuth.Email do
+defmodule Accounts.Email do
   @moduledoc """
   Handles templating and setup work for emails.
   """
 
   import Swoosh.Email
 
-  alias FlatpakAuth.Repo
-  alias FlatpakAuth.Schema.{User, UserToken}
-  alias FlatpakAuthWeb.{Endpoint, Router}
+  alias Accounts.Repo
+  alias Accounts.Schema.{User, UserToken}
+  alias AccountsWeb.{Endpoint, Router}
 
   def send(%UserToken{} = token) do
     user =

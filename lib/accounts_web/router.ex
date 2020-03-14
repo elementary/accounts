@@ -1,5 +1,5 @@
-defmodule FlatpakAuthWeb.Router do
-  use FlatpakAuthWeb, :router
+defmodule AccountsWeb.Router do
+  use AccountsWeb, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -16,25 +16,25 @@ defmodule FlatpakAuthWeb.Router do
   scope "/" do
     pipe_through :browser
 
-    if Keyword.get(Application.get_env(:flatpak_auth, FlatpakAuth.Mailer), :mailbox, false) do
+    if Keyword.get(Application.get_env(:accounts, Accounts.Mailer), :mailbox, false) do
       forward "/mail", Plug.Swoosh.MailboxPreview, base_path: "/mail"
     end
   end
 
-  scope "/", FlatpakAuthWeb do
+  scope "/", AccountsWeb do
     pipe_through :browser
 
     get "/", HomepageController, :index
   end
 
-  scope "/auth/v1", FlatpakAuthWeb do
+  scope "/auth/v1", AccountsWeb do
     pipe_through :browser
 
     get "/", OauthController, :index
     get "/:token", OauthController, :continue
   end
 
-  scope "/api/v1", FlatpakAuthWeb do
+  scope "/api/v1", AccountsWeb do
     pipe_through :api
 
     get "/history", PurchaseController, :index

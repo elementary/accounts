@@ -1,11 +1,11 @@
-defmodule FlatpakAuthWeb.Gettext do
+defmodule AccountsWeb.Gettext do
   @moduledoc """
   A module providing Internationalization with a gettext-based API.
 
   By using [Gettext](https://hexdocs.pm/gettext),
   your module gains a set of macros for translations, for example:
 
-      import FlatpakAuthWeb.Gettext
+      import AccountsWeb.Gettext
 
       # Simple translation
       gettext("Here is the string to translate")
@@ -20,5 +20,5 @@ defmodule FlatpakAuthWeb.Gettext do
 
   See the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.
   """
-  use Gettext, otp_app: :flatpak_auth
+  use Gettext, otp_app: :accounts
 end

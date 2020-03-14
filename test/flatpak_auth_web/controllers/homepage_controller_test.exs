@@ -1,5 +1,5 @@
-defmodule FlatpakAuthWeb.HomepageControllerTest do
-  use FlatpakAuthWeb.ConnCase
+defmodule AccountsWeb.HomepageControllerTest do
+  use AccountsWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get(conn, "/")

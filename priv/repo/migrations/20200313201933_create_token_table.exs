@@ -1,4 +1,4 @@
-defmodule FlatpakAuth.Repo.Migrations.CreateTokenTable do
+defmodule Accounts.Repo.Migrations.CreateTokenTable do
   use Ecto.Migration
 
   def change do

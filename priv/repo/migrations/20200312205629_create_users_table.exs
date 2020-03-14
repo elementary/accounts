@@ -1,4 +1,4 @@
-defmodule FlatpakAuth.Repo.Migrations.CreateUsersTable do
+defmodule Accounts.Repo.Migrations.CreateUsersTable do
   use Ecto.Migration
 
   def change do

@@ -1,6 +1,6 @@
-defmodule FlatpakAuth do
+defmodule Accounts do
   @moduledoc """
-  FlatpakAuth keeps the contexts that define your domain
+  Accounts keeps the contexts that define your domain
   and business logic.
 
   Contexts are also responsible for managing your data, regardless
