@@ -7,12 +7,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-development
-    stdin_open: true
-    tty: true
-    ports:
-      - "4000:4000"
-    environment:
-      PORT: 4000
+    network_mode: host
     volumes:
       - ./assets:/opt/accounts/assets
       - ./config:/opt/accounts/config
@@ -26,6 +21,7 @@ services:
 
   postgres:
     image: timescale/timescaledb:latest-pg11
+    network_mode: host
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USERNAME: postgres

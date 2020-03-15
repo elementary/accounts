@@ -6,7 +6,7 @@ defmodule Accounts.Email do
   import Swoosh.Email
 
   alias Accounts.Repo
-  alias Accounts.Schema.{User, UserToken}
+  alias Accounts.Schema.UserToken
   alias AccountsWeb.{Endpoint, Router}
 
   def send(%UserToken{} = token) do

@@ -4,7 +4,6 @@ config :accounts, Accounts.Repo,
   username: "postgres",
   password: "postgres",
   database: "accounts_test",
-  hostname: "postgres",
   pool: Ecto.Adapters.SQL.Sandbox
 
 config :accounts, AccountsWeb.Endpoint,

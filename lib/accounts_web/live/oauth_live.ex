@@ -5,7 +5,6 @@ defmodule AccountsWeb.OauthLive do
 
   use Phoenix.LiveView
 
-  alias Ecto.Changeset
   alias Accounts.User
 
   @default_state [
@@ -25,7 +24,7 @@ defmodule AccountsWeb.OauthLive do
   end
 
   defp wait(socket, user) do
-    with {:ok, user} <- User.login(user.email) do
+    with {:ok, user} <- User.login(user) do
       AccountsWeb.Endpoint.subscribe("user:" <> to_string(user.id))
       {:noreply, set(socket, template: "logging_in.html", user: user)}
     end
@@ -42,7 +41,7 @@ defmodule AccountsWeb.OauthLive do
     {:ok, set(socket)}
   end
 
-  def handle_event("login", %{"email" => email}, socket) do
+  def handle_event("submit", %{"email" => email}, socket) do
     case User.get(email) do
       nil -> register(socket, email)
       user -> wait(socket, user)
@@ -56,4 +55,6 @@ defmodule AccountsWeb.OauthLive do
   def handle_info(%{event: "validate", payload: %{token: token}}, socket) do
     {:noreply, set(socket, template: "complete.html", token: token)}
   end
+
+  def handle_info(_payload, socket), do: {:noreply, socket}
 end
