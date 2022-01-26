@@ -6,7 +6,7 @@
         "development": "mix",
         "watch": "mix watch",
         "hot": "mix watch --hot",
-        "format": "prettier ."
+        "format": "prettier --write ."
     },
     "devDependencies": {
         "@prettier/plugin-php": "^0.17.6",
