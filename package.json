@@ -1,19 +1,21 @@
 {
     "private": true,
     "scripts": {
+        "start": "mix --production",
         "dev": "npm run development",
         "development": "mix",
         "watch": "mix watch",
-        "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
-        "prod": "npm run production",
-        "production": "mix --production"
+        "format": "prettier ."
     },
     "devDependencies": {
+        "@prettier/plugin-php": "^0.17.6",
         "axios": "^0.21",
         "laravel-mix": "^6.0.6",
         "laravel-mix-tailwind": "^0.1.2",
         "lodash": "^4.17.19",
+        "prettier": "^2.5.1",
+        "prettier-plugin-tailwindcss": "^0.1.4",
         "tailwindcss": "^3.0.17"
     }
 }
