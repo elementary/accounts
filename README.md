@@ -15,7 +15,13 @@
 
 ## About Accounts
 
-Accounts is an OAuth 2 server that provides user data to other services. It is written in PHP with Laravel and uses the official Laravel Passport library for authentication.
+Accounts is an OAuth 2 server that provides user data to other services. It is written in PHP with Laravel with these additional packages:
+
+-   Alpine JS
+-   Laravel Jetstream
+-   Laravel Password
+-   Livewire
+-   Tailwind CSS
 
 ### Running
 
