@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout class="bg-gray-100">
     <x-jet-authentication-card>
         <x-slot name="logo">
             <x-jet-authentication-card-logo />

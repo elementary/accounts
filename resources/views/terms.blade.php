@@ -1,13 +1,5 @@
-<x-guest-layout>
-    <div class="pt-4 bg-gray-100">
-        <div class="min-h-screen flex flex-col items-center pt-6 sm:pt-0">
-            <div>
-                <x-jet-authentication-card-logo />
-            </div>
-
-            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose">
-                {!! $terms !!}
-            </div>
-        </div>
+<x-guest-layout class="bg-slate-700">
+    <div class="mx-auto w-full max-w-2xl mt-6 p-6 prose prose-invert">
+        {!! $terms !!}
     </div>
 </x-guest-layout>
